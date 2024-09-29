@@ -41,7 +41,7 @@ checkprograms: $(check_PROGRAMS)
 # src/ #
 ########
 
-BUILT_SOURCES = src/test_endswap.c
+BUILT_SOURCES = 
 
 SYMBOL_FILES = src/Symbols.gnu-binutils src/Symbols.darwin src/libsndfile-1.def src/Symbols.os2 src/Symbols.static
 
@@ -223,17 +223,6 @@ check_PROGRAMS += tests/sfversion tests/floating_point_test tests/write_read_tes
 	tests/channel_test tests/long_read_write_test tests/stdin_test tests/stdout_test \
 	tests/dither_test tests/fix_this tests/largefile_test tests/benchmark tests/ogg_opus_test \
 	tests/mpeg_test
-
-BUILT_SOURCES += \
-	tests/write_read_test.c \
-	tests/pcm_test.c \
-	tests/header_test.c \
-	tests/utils.c \
-	tests/scale_clip_test.c \
-	tests/pipe_test.c \
-	tests/rdwr_test.c \
-	tests/floating_point_test.c \
-	tests/benchmark.c
 
 EXTRA_DIST += $(BUILT_SOURCES) \
 	tests/write_read_test.tpl     tests/write_read_test.def \
@@ -538,10 +527,3 @@ endif
 regtest_sndfile_regtest_SOURCES = regtest/regtest.h regtest/sndfile-regtest.c regtest/database.c regtest/checksum.c
 regtest_sndfile_CPPFLAGS = -I$(top_srcdir)/src $(SQLITE3_CFLAGS) $(OS_SPECIFIC_CFLAGS)
 regtest_sndfile_regtest_LDADD = src/libsndfile.la $(SQLITE3_LIBS)
-
-################
-# test-tarball #
-################
-test-tarball : Scripts/build-test-tarball.mk
-	$(MAKE) $(bin_PROGRAMS) $(check_PROGRAMS)
-	$(MAKE) -f Scripts/build-test-tarball.mk
